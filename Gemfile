@@ -14,4 +14,5 @@ group :development, :test do
   gem 'factory_girl_rails', '4.3.0'
   gem 'spork-rails', '4.0.0'
   gem 'rubygems-bundler'
+  gem 'erb2haml'
 end
