@@ -2,6 +2,8 @@
 
 FactoryGirl.define do
   factory :haiku do
+    association :user
+
     poem "MyText"
   end
 end
