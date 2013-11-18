@@ -1,7 +1,7 @@
 class CreateHaikus < ActiveRecord::Migration
   def change
     create_table :haikus do |t|
-      t.references :user
+      t.belongs_to :user, index: true
       t.text       :poem
 
       t.timestamps

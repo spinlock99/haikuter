@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20131118191735) do
     t.datetime "updated_at"
   end
 
+  add_index "haikus", ["user_id"], name: "index_haikus_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
