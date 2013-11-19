@@ -1,5 +1,6 @@
 Hikuter::Application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  resource :haikus
+  resources :users
+  resources :haiku
 end

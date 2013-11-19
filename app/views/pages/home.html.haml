@@ -1,5 +1,5 @@
 %h3 A Haiku is a Japanese poem of seventeen syllables, in three lines of five, seven, and five, traditionally evoking images of the natural world.
 %p Create your own:
-= form_for @haiku do |f|
-  = f.text_area :poem, rows: 3
-  = f.submit "Submit"
+= form_for @haiku do |form|
+  = form.text_area :poem, rows: 3
+  = form.submit "Submit"

@@ -13,14 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20131118191735) do
 
-  create_table "haikus", force: true do |t|
+  create_table "haiku", force: true do |t|
     t.integer  "user_id"
     t.text     "poem"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "haikus", ["user_id"], name: "index_haikus_on_user_id"
+  add_index "haiku", ["user_id"], name: "index_haiku_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

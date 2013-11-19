@@ -12,6 +12,8 @@ gem 'turbolinks'
 group :development, :test do
   gem 'sqlite3'
   gem 'debugger'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'rspec-rails', '2.14.0'
   gem 'factory_girl_rails', '4.3.0'
   gem 'spork-rails', '4.0.0'
