@@ -1,13 +1,15 @@
 # Haikuter
 
-To start your Phoenix server:
+Example poject to learn about Phoenix.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+  * Phoenix Tutorial: https://thephoenixtutorial.org/
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Rather than using Gigalixir I'm rolling my own deploy with:
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+  * SSL: https://letsencrypt.org/
+  * Nginx
+  * SystemD
+  * Elixir Release
 
 ## Learn more
 
