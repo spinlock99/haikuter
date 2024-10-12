@@ -17,7 +17,8 @@ defmodule HaikuterWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import HaikuterWeb.Gettext
+  use Gettext, backend: HaikuterWeb.Gettext
+
 
   @doc """
   Renders a modal.

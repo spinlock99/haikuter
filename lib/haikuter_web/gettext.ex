@@ -20,5 +20,5 @@ defmodule HaikuterWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :haikuter
+  use Gettext.Backend, otp_app: :haikuter
 end

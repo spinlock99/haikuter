@@ -43,7 +43,7 @@ defmodule HaikuterWeb do
         layouts: [html: HaikuterWeb.Layouts]
 
       import Plug.Conn
-      import HaikuterWeb.Gettext
+      use Gettext, backend: HaikuterWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -85,7 +85,7 @@ defmodule HaikuterWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import HaikuterWeb.CoreComponents
-      import HaikuterWeb.Gettext
+      use Gettext, backend: HaikuterWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
