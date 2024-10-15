@@ -35,3 +35,5 @@ haikuter-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Capistrano Log Files
+/log/
