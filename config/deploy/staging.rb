@@ -12,6 +12,8 @@
 # role-based syntax
 # ==================
 
+role :app, %w{builder@staging.haikuter.com}
+
 # Defines a role with one or multiple servers. The primary server in each
 # group is considered to be the first unless any hosts have the primary
 # property set. Specify the username and a domain or IP for the server.
@@ -20,8 +22,6 @@
 # role :app, %w{deploy@example.com}, my_property: :my_value
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
-
-role :web, %w{staging.haikuter.com}
 
 # Configuration
 # =============
@@ -59,3 +59,20 @@ role :web, %w{staging.haikuter.com}
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+#
+
+namespace :deploy do
+  task :updated do
+    SSHKit.config.command_map.prefix[:mix].unshift("#{fetch(:asdf_wrapper_path)}")
+    on roles(:app) do |host|
+      within release_path do
+        SSHKit.config.default_env[:MIX_ENV] = 'prod'
+        execute(:mix, 'deps.get --only prod')
+        execute(:mix, 'compile')
+        execute(:mix, 'assets.deploy')
+        execute(:mix, 'phx.gen.release')
+        execute(:mix, 'release')
+      end
+    end
+  end
+end
