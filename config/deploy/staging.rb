@@ -2,16 +2,32 @@ role :app, %w{builder@staging.haikuter.com}
 
 namespace :deploy do
   task :updated do
+    invoke "deploy:build_release"
+  end
+
+  task :build_release do
     SSHKit.config.command_map.prefix[:mix].unshift("#{fetch(:asdf_wrapper_path)}")
     SSHKit.config.default_env[:MIX_ENV] = 'prod'
 
     on roles(:app) do |host|
       within release_path do
-        execute(:mix, 'deps.get --only prod')
-        execute(:mix, 'compile')
-        execute(:mix, 'assets.deploy')
-        execute(:mix, 'phx.gen.release')
-        execute(:mix, 'release')
+        execute(:mix, 'deps.get --only prod >/dev/null')
+        execute(:mix, 'compile >/dev/null')
+        execute(:mix, 'assets.deploy >/dev/null')
+        execute(:mix, 'phx.gen.release >/dev/null')
+        execute(:mix, 'release >/dev/null')
+      end
+    end
+  end
+
+  namespace :symlink do
+    task :release do
+      invoke "deploy:symlink:restart_service"
+    end
+
+    task :restart_service do
+      on roles(:app) do |host|
+        execute(:touch, '/var/www/haikuter/current')
       end
     end
   end
