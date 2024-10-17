@@ -64,9 +64,10 @@ role :app, %w{builder@staging.haikuter.com}
 namespace :deploy do
   task :updated do
     SSHKit.config.command_map.prefix[:mix].unshift("#{fetch(:asdf_wrapper_path)}")
+    SSHKit.config.default_env[:MIX_ENV] = 'prod'
+
     on roles(:app) do |host|
       within release_path do
-        SSHKit.config.default_env[:MIX_ENV] = 'prod'
         execute(:mix, 'deps.get --only prod')
         execute(:mix, 'compile')
         execute(:mix, 'assets.deploy')
