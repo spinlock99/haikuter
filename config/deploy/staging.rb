@@ -72,6 +72,7 @@ namespace :deploy do
         execute(:mix, 'assets.deploy')
         execute(:mix, 'phx.gen.release')
         execute(:mix, 'release')
+        execute(:systemctl, 'restart haikuter.service')
       end
     end
   end
