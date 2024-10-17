@@ -1,3 +1,22 @@
+role :app, %w{builder@staging.haikuter.com}
+
+namespace :deploy do
+  task :updated do
+    SSHKit.config.command_map.prefix[:mix].unshift("#{fetch(:asdf_wrapper_path)}")
+    SSHKit.config.default_env[:MIX_ENV] = 'prod'
+
+    on roles(:app) do |host|
+      within release_path do
+        execute(:mix, 'deps.get --only prod')
+        execute(:mix, 'compile')
+        execute(:mix, 'assets.deploy')
+        execute(:mix, 'phx.gen.release')
+        execute(:mix, 'release')
+      end
+    end
+  end
+end
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -11,9 +30,6 @@
 
 # role-based syntax
 # ==================
-
-role :app, %w{builder@staging.haikuter.com}
-
 # Defines a role with one or multiple servers. The primary server in each
 # group is considered to be the first unless any hosts have the primary
 # property set. Specify the username and a domain or IP for the server.
@@ -60,21 +76,3 @@ role :app, %w{builder@staging.haikuter.com}
 #     # password: "please use keys"
 #   }
 #
-
-namespace :deploy do
-  task :updated do
-    SSHKit.config.command_map.prefix[:mix].unshift("#{fetch(:asdf_wrapper_path)}")
-    SSHKit.config.default_env[:MIX_ENV] = 'prod'
-
-    on roles(:app) do |host|
-      within release_path do
-        execute(:mix, 'deps.get --only prod')
-        execute(:mix, 'compile')
-        execute(:mix, 'assets.deploy')
-        execute(:mix, 'phx.gen.release')
-        execute(:mix, 'release')
-        execute(:systemctl, 'restart haikuter.service')
-      end
-    end
-  end
-end
