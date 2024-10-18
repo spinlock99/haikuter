@@ -39,7 +39,7 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 set :ssh_options, verify_host_key: :always
 
 # capistrano asdf plugin
-set :asdf_tools, %w{ ruby elixir erlang python nodejs }
+set :asdf_tools, %w{ elixir erlang nodejs }
 
 desc "Check that we can access everything"
 task :check_write_permissions do
