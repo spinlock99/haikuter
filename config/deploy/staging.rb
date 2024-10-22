@@ -11,11 +11,12 @@ namespace :deploy do
 
     on roles(:app) do |host|
       within release_path do
-        execute(:mix, 'deps.get --only prod >/dev/null')
-        execute(:mix, 'compile >/dev/null')
-        execute(:mix, 'assets.deploy >/dev/null')
-        execute(:mix, 'phx.gen.release >/dev/null')
-        execute(:mix, 'release >/dev/null')
+        trace = Rake.application.options.trace ? "" : " >/dev/null"
+        execute(:mix, 'deps.get --only prod' + trace)
+        execute(:mix, 'compile' + trace)
+        execute(:mix, 'assets.deploy' + trace)
+        execute(:mix, 'phx.gen.release' + trace)
+        execute(:mix, 'release' + trace)
       end
     end
   end
