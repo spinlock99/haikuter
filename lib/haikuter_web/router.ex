@@ -19,6 +19,7 @@ defmodule HaikuterWeb.Router do
 
     get "/", PageController, :home
     resources "/users", UserController
+    resources "/microposts", MicropostController
   end
 
   # Other scopes may use custom stacks.
