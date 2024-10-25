@@ -18,7 +18,6 @@ defmodule HaikuterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    resources "/microposts", MicropostController
   end
 
   # Other scopes may use custom stacks.
