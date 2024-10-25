@@ -4,21 +4,6 @@ defmodule Haikuter.AccountsFixtures do
   entities via the `Haikuter.Accounts` context.
   """
 
-  @doc """
-  Generate a user.
-  """
-  def user_fixture(attrs \\ %{}) do
-    {:ok, user} =
-      attrs
-      |> Enum.into(%{
-        email: "some email",
-        name: "some name"
-      })
-      |> Haikuter.Accounts.create_user()
-
-    user
-  end
-
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
   def valid_user_password, do: "hello world!"
 
