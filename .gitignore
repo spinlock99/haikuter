@@ -37,3 +37,7 @@ npm-debug.log
 
 # Capistrano Log Files
 /log/
+
+# Self Signed Cert
+/nginx/derico-ca.*
+/nginx/haikuter.com.*
